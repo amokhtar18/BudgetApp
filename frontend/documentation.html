@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation | HNH Budget System</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS Variables - Matching App Colors */
+        :root {
+            --primary: #0C5A91;
+            --primary-dark: #084670;
+            --primary-light: #1E7AB8;
+            --accent: #EF4151;
+            --accent-dark: #D32F3F;
+            --accent-light: #F56C78;
+            --gradient-primary: linear-gradient(135deg, #0C5A91 0%, #1E7AB8 50%, #3A9AD9 100%);
+            --gradient-accent: linear-gradient(135deg, #EF4151 0%, #F56C78 100%);
+            --gradient-header: linear-gradient(90deg, #0C5A91 0%, #1565A8 40%, #D63447 100%);
+            --text-dark: #1E3A5F;
+            --text-muted: #64748B;
+            --bg-light: #F1F5F9;
+            --bg-white: #FFFFFF;
+            --border: #E2E8F0;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --shadow: 0 4px 20px rgba(12, 90, 145, 0.12);
+            --shadow-lg: 0 10px 40px rgba(12, 90, 145, 0.18);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #E8EEF4 0%, #F1F5F9 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient-header);
+            padding: 1.5rem 2rem;
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-title i {
+            font-size: 2rem;
+            color: white;
+            opacity: 0.9;
+        }
+
+        .header-title h1 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .header-title span {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .header-nav a {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-nav a:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            background: var(--bg-white);
+            padding: 0.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-tabs a {
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-tabs a:hover {
+            background: var(--bg-light);
+            color: var(--primary);
+        }
+
+        .nav-tabs a.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Section */
+        .section {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--bg-light);
+        }
+
+        .section-header i {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .section-header h2 {
+            color: var(--text-dark);
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .section h3 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin: 1.5rem 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section h3::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        /* Cards Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin: 1.5rem 0;
+        }
+
+        .card {
+            background: var(--bg-light);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            border-left: 4px solid var(--primary);
+            transition: all 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .card h4 {
+            color: var(--primary);
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h4 i {
+            color: var(--accent);
+        }
+
+        .card ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .card ul li {
+            padding: 0.4rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .card ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary-light);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 0.875rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        th:first-child {
+            border-radius: var(--radius-sm) 0 0 0;
+        }
+
+        th:last-child {
+            border-radius: 0 var(--radius-sm) 0 0;
+        }
+
+        tr:hover {
+            background: rgba(12, 90, 145, 0.04);
+        }
+
+        /* Workflow Steps */
+        .workflow {
+            margin: 1.5rem 0;
+        }
+
+        .workflow-step {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .workflow-step::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 45px;
+            bottom: -10px;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .workflow-step:last-child::before {
+            display: none;
+        }
+
+        .step-number {
+            width: 42px;
+            height: 42px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .step-content {
+            flex: 1;
+            background: var(--bg-light);
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-md);
+        }
+
+        .step-content h4 {
+            color: var(--text-dark);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-content p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: #1E293B;
+            color: #E2E8F0;
+            padding: 1.25rem;
+            border-radius: var(--radius-md);
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            line-height: 1.7;
+        }
+
+        .code-block .comment {
+            color: #10B981;
+        }
+
+        .code-block .highlight {
+            color: #F59E0B;
+        }
+
+        .code-block .value {
+            color: #60A5FA;
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border: 1px solid #F59E0B;
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .formula-box .formula {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-dark);
+            font-family: 'JetBrains Mono', monospace;
+            margin: 0.5rem 0;
+        }
+
+        .formula-box p {
+            color: #92400E;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Example Box */
+        .example-box {
+            background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+            border: 1px solid #10B981;
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            margin: 1rem 0;
+        }
+
+        .example-box h4 {
+            color: #065F46;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .badge-accent {
+            background: var(--accent);
+            color: white;
+        }
+
+        .badge-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .badge-warning {
+            background: var(--warning);
+            color: white;
+        }
+
+        /* Factor Grid */
+        .factor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .factor-item {
+            background: var(--bg-light);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .factor-item:hover {
+            border-color: var(--primary-light);
+        }
+
+        .factor-item .factor-value {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .factor-item .factor-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Diagram */
+        .diagram {
+            background: #1E293B;
+            color: #E2E8F0;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            overflow-x: auto;
+            white-space: pre;
+            line-height: 1.5;
+            margin: 1rem 0;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(12, 90, 145, 0.08) 0%, rgba(30, 122, 184, 0.08) 100%);
+            border: 1px solid rgba(12, 90, 145, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            margin: 1rem 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+        }
+
+        .highlight-box strong {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .section {
+                padding: 1.25rem;
+            }
+
+            header {
+                padding: 1rem;
+            }
+
+            .header-title h1 {
+                font-size: 1.2rem;
+            }
+
+            .nav-tabs a {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .diagram {
+                font-size: 0.7rem;
+            }
+
+            .workflow-step {
+                flex-direction: column;
+            }
+
+            .workflow-step::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="header-title">
+                <i class="fas fa-book"></i>
+                <div>
+                    <h1>Budget System Documentation</h1>
+                    <span>Healthcare Budget Management Guide</span>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="index.html"><i class="fas fa-calculator"></i> Budget Entry</a>
+                <a href="daily-budget.html"><i class="fas fa-calendar-day"></i> Daily Budget</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs">
+            <a href="#overview" class="active"><i class="fas fa-home"></i> Overview</a>
+            <a href="#concepts"><i class="fas fa-cube"></i> Concepts</a>
+            <a href="#workflow"><i class="fas fa-project-diagram"></i> Workflow</a>
+            <a href="#daily-calc"><i class="fas fa-calculator"></i> Daily Calc</a>
+            <a href="#calendar"><i class="fas fa-calendar-alt"></i> Calendar</a>
+            <a href="#permissions"><i class="fas fa-lock"></i> Permissions</a>
+            <a href="#api"><i class="fas fa-plug"></i> API</a>
+        </nav>
+
+        <!-- Overview Section -->
+        <section id="overview" class="section">
+            <div class="section-header">
+                <i class="fas fa-info-circle"></i>
+                <h2>System Overview</h2>
+            </div>
+            
+            <p>This Budget Application is designed for healthcare facilities to manage budget assumptions across multiple branches and distribute quarterly budgets to daily values using historical patterns and calendar adjustments.</p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-hospital"></i> Multi-Branch Support</h4>
+                    <ul>
+                        <li>6 Healthcare Branches</li>
+                        <li>Branch-specific budget planning</li>
+                        <li>Role-based access control</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4><i class="fas fa-calendar-check"></i> Quarterly Planning</h4>
+                    <ul>
+                        <li>Q1, Q2, Q3, Q4 budgets</li>
+                        <li>Multiple scenarios support</li>
+                        <li>Full version history (SCD)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4><i class="fas fa-chart-line"></i> Daily Distribution</h4>
+                    <ul>
+                        <li>Historical pattern-based</li>
+                        <li>Calendar factor adjustments</li>
+                        <li>Automatic reconciliation</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Concepts Section -->
+        <section id="concepts" class="section">
+            <div class="section-header">
+                <i class="fas fa-cube"></i>
+                <h2>Core Concepts</h2>
+            </div>
+
+            <h3>Branches</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Branch Name</th>
+                        <th>Region</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Riyadh</td><td>Central</td></tr>
+                    <tr><td>2</td><td>Khamis</td><td>Southern</td></tr>
+                    <tr><td>3</td><td>Jazan</td><td>Southern</td></tr>
+                    <tr><td>4</td><td>Qassem</td><td>Central</td></tr>
+                    <tr><td>5</td><td>Madinah</td><td>Western</td></tr>
+                    <tr><td>6</td><td>Abha</td><td>Southern</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Metrics & Care Types</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Care Types</th>
+                        <th>Input Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-primary">Census</span></td>
+                        <td>OP, ER</td>
+                        <td>Growth Rate</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">Conversion</span></td>
+                        <td>OP, ER</td>
+                        <td>Exact Value %</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-accent">CPE</span></td>
+                        <td>OP, ER</td>
+                        <td>Exact Number</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-accent">Avg Revenue/Night</span></td>
+                        <td>Non-LTC, LTC</td>
+                        <td>Exact Number</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-success">ALOS</span></td>
+                        <td>Non-LTC, LTC</td>
+                        <td>Exact Number</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-success">Direct Admissions</span></td>
+                        <td>LTC only</td>
+                        <td>Exact Number</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Scenarios</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-chart-bar"></i> Most Likely</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">Baseline scenario for expected performance under normal conditions.</p>
+                </div>
+                <div class="card">
+                    <h4><i class="fas fa-rocket"></i> Best Case</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">Optimistic scenario with favorable market conditions.</p>
+                </div>
+                <div class="card">
+                    <h4><i class="fas fa-shield-alt"></i> Worst Case</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">Conservative scenario accounting for risks.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Workflow Section -->
+        <section id="workflow" class="section">
+            <div class="section-header">
+                <i class="fas fa-project-diagram"></i>
+                <h2>Data Entry Workflow</h2>
+            </div>
+
+            <div class="workflow">
+                <div class="workflow-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>User Enters Budget Assumptions</h4>
+                        <p>Users input quarterly budget metrics (Census, CPE, ALOS, Revenue targets) through the web interface for their assigned branch.</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Data Stored with SCD Versioning</h4>
+                        <p>Each edit creates a new version in PostgreSQL. Old versions are marked as historical, maintaining complete audit trail.</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Budget View Calculation</h4>
+                        <p>ClickHouse view (vw_Budget) calculates aggregated metrics: Census, CPE, ALOS, Revenue per Branch/Quarter/CareType.</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Daily Distribution</h4>
+                        <p>Quarterly budgets are distributed to daily values using historical patterns and calendar adjustment factors.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Data Flow Diagram</h3>
+            <div class="diagram">PostgreSQL                              ClickHouse
+┌─────────────────────┐                 ┌─────────────────────┐
+│  budget_assumptions │                 │     vw_Budget       │
+│  ─────────────────  │────────────────▶│  ───────────────    │
+│  • Raw user input   │                 │  • Calculated KPIs  │
+│  • SCD versioning   │                 │  • Quarterly totals │
+└─────────────────────┘                 └─────────────────────┘
+         │                                        │
+         │                                        ▼
+         │                              ┌─────────────────────┐
+         │                              │ vw_actual_for_weghit│
+         │                              │  • 2-year average   │
+         │                              │  • Daily patterns   │
+         │                              └─────────────────────┘
+         ▼                                        │
+┌─────────────────────┐                           │
+│  Calendar Tables    │                           ▼
+│  • public_holidays  │◀──────────────▶ ┌─────────────────────┐
+│  • ramadan_periods  │                 │  Daily Budget       │
+│  • eid_periods      │                 │  Distribution       │
+│  • day_adjustments  │                 └─────────────────────┘
+└─────────────────────┘</div>
+        </section>
+
+        <!-- Daily Budget Calculation Section -->
+        <section id="daily-calc" class="section">
+            <div class="section-header">
+                <i class="fas fa-calculator"></i>
+                <h2>Daily Budget Distribution</h2>
+            </div>
+
+            <p>The daily distribution process takes quarterly budget totals and intelligently spreads them across individual days using historical spending patterns.</p>
+
+            <h3>Calculation Steps</h3>
+            <div class="workflow">
+                <div class="workflow-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Fetch Quarterly Budget</h4>
+                        <p>Retrieve data from ClickHouse vw_Budget: Branch, Quarter, CareType, StayType, Census, CPE, ALOS, Revenue</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Get Historical Weights</h4>
+                        <p>Query vw_actual_for_weghit containing 2-year average by Branch, Month, Day Position, CareType, StayType</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Calculate Base Weights</h4>
+                        <p>For each day position, calculate what percentage of quarterly revenue it historically represents</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Apply Calendar Adjustments</h4>
+                        <p>Multiply base weights by calendar factors (weekends, holidays, Ramadan, Eid periods)</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Normalize & Distribute</h4>
+                        <p>Ensure weights sum to 1.0, then multiply quarterly totals by normalized weights</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Weight Calculation Formulas</h3>
+            <div class="formula-box">
+                <p>Base Weight</p>
+                <div class="formula">Weight = Day Revenue ÷ Quarter Total Revenue</div>
+            </div>
+            <div class="formula-box">
+                <p>Adjusted Weight</p>
+                <div class="formula">Adjusted = Base Weight × Calendar Factor</div>
+            </div>
+            <div class="formula-box">
+                <p>Normalized Weight</p>
+                <div class="formula">Normalized = Adjusted ÷ Sum(All Adjusted)</div>
+            </div>
+
+            <h3>Day Position Mapping</h3>
+            <div class="highlight-box">
+                <p><strong>What is Day Position?</strong></p>
+                <p style="margin-top: 0.5rem;">Day Position represents which occurrence of a weekday falls within a month. For example, "1st Sunday" or "2nd Monday". This maps historical patterns to future dates.</p>
+            </div>
+
+            <div class="example-box">
+                <h4><i class="fas fa-lightbulb"></i> Example Calculation</h4>
+                <p style="margin-bottom: 0.75rem;"><strong>Q1 Budget:</strong> 1,000,000 SAR</p>
+                <div class="code-block">
+<span class="comment">// Regular Weekday</span>
+Base Weight = <span class="value">1.2%</span>, Calendar Factor = <span class="value">1.0</span>
+Daily Revenue = <span class="highlight">1,000,000 × 0.012 × 1.0 = 12,000 SAR</span>
+
+<span class="comment">// Friday (Weekend)</span>
+Base Weight = <span class="value">0.5%</span>, Calendar Factor = <span class="value">0.5</span>
+Daily Revenue = <span class="highlight">1,000,000 × 0.005 × 0.5 = 2,500 SAR</span>
+
+<span class="comment">// Eid Holiday</span>
+Base Weight = <span class="value">1.0%</span>, Calendar Factor = <span class="value">0.3</span>
+Daily Revenue = <span class="highlight">1,000,000 × 0.010 × 0.3 = 3,000 SAR</span></div>
+            </div>
+        </section>
+
+        <!-- Calendar Factors Section -->
+        <section id="calendar" class="section">
+            <div class="section-header">
+                <i class="fas fa-calendar-alt"></i>
+                <h2>Calendar Adjustment Factors</h2>
+            </div>
+
+            <p>Calendar factors adjust daily distribution to account for reduced activity during weekends, holidays, and special periods.</p>
+
+            <h3>Day of Week Factors</h3>
+            <div class="factor-grid">
+                <div class="factor-item">
+                    <div class="factor-value">1.0</div>
+                    <div class="factor-label">Sun - Thu</div>
+                </div>
+                <div class="factor-item">
+                    <div class="factor-value" style="color: var(--accent);">0.5</div>
+                    <div class="factor-label">Friday</div>
+                </div>
+                <div class="factor-item">
+                    <div class="factor-value" style="color: var(--warning);">0.6</div>
+                    <div class="factor-label">Saturday</div>
+                </div>
+            </div>
+
+            <h3>Special Period Factors</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Period</th>
+                        <th>Factor</th>
+                        <th>Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-warning">Public Holidays</span></td>
+                        <td>0.5</td>
+                        <td>50% of normal activity</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">Ramadan</span></td>
+                        <td>0.7</td>
+                        <td>70% of normal activity</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-accent">Eid Al-Fitr</span></td>
+                        <td>0.3</td>
+                        <td>30% of normal activity</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-accent">Eid Al-Adha</span></td>
+                        <td>0.3</td>
+                        <td>30% of normal activity</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Factor Priority</h3>
+            <div class="highlight-box">
+                <p>When multiple factors apply, the system uses this priority:</p>
+                <ol style="margin: 0.75rem 0 0 1.25rem; color: var(--text-muted);">
+                    <li><strong>Public Holiday</strong> - Specific date takes highest priority</li>
+                    <li><strong>Eid Period</strong> - If within Eid date range</li>
+                    <li><strong>Ramadan Period</strong> - If within Ramadan date range</li>
+                    <li><strong>Day of Week</strong> - Default weekday factor</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Permissions Section -->
+        <section id="permissions" class="section">
+            <div class="section-header">
+                <i class="fas fa-lock"></i>
+                <h2>User Permissions</h2>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>View Data</th>
+                        <th>Edit Budget</th>
+                        <th>Calendar</th>
+                        <th>Users</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-accent">Admin</span></td>
+                        <td>All branches</td>
+                        <td>All branches</td>
+                        <td>✅ Yes</td>
+                        <td>✅ Yes</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">User (with branch)</span></td>
+                        <td>Own branch</td>
+                        <td>Own branch</td>
+                        <td>❌ No</td>
+                        <td>❌ No</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-success">User (no branch)</span></td>
+                        <td>All branches</td>
+                        <td>All branches</td>
+                        <td>❌ No</td>
+                        <td>❌ No</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Authentication</h3>
+            <div class="code-block">
+<span class="comment">// Login Process</span>
+1. User submits username/password
+2. Password hashed with SHA-256 + salt
+3. Credentials verified against database
+4. Session created (8-hour lifetime)
+
+<span class="comment">// Security Features</span>
+• HTTPOnly cookies (XSS protection)
+• SameSite=Lax (CSRF protection)
+• 8-hour session timeout</div>
+        </section>
+
+        <!-- API Reference Section -->
+        <section id="api" class="section">
+            <div class="section-header">
+                <i class="fas fa-plug"></i>
+                <h2>API Reference</h2>
+            </div>
+
+            <h3>Authentication Endpoints</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Endpoint</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-success">POST</span></td>
+                        <td>/api/auth/login</td>
+                        <td>User login</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-success">POST</span></td>
+                        <td>/api/auth/logout</td>
+                        <td>User logout</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">GET</span></td>
+                        <td>/api/auth/check</td>
+                        <td>Check auth status</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Budget Endpoints</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Endpoint</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-primary">GET</span></td>
+                        <td>/api/config</td>
+                        <td>Get configuration</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">GET</span></td>
+                        <td>/api/budget/{year}</td>
+                        <td>Get budget data</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-success">POST</span></td>
+                        <td>/api/budget</td>
+                        <td>Create records</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-warning">PUT</span></td>
+                        <td>/api/budget/{id}</td>
+                        <td>Update record</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-warning">PUT</span></td>
+                        <td>/api/budget/batch</td>
+                        <td>Batch update</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Daily Budget Endpoints</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Endpoint</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-success">POST</span></td>
+                        <td>/api/daily-budget/calculate</td>
+                        <td>Calculate distribution</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">GET</span></td>
+                        <td>/api/daily-budget/summary</td>
+                        <td>Get summary</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-success">POST</span></td>
+                        <td>/api/daily-budget/publish</td>
+                        <td>Publish to ClickHouse</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Calendar Endpoints</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Endpoint</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-primary">GET</span></td>
+                        <td>/api/calendar/holidays</td>
+                        <td>Get holidays</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">GET</span></td>
+                        <td>/api/calendar/ramadan</td>
+                        <td>Get Ramadan periods</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">GET</span></td>
+                        <td>/api/calendar/eid</td>
+                        <td>Get Eid periods</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">GET</span></td>
+                        <td>/api/calendar/day-adjustments</td>
+                        <td>Get day factors</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <footer>
+            <p>© 2025 Hayat National Hospitals • Budget Management System Documentation</p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scrolling and active nav state
+        document.querySelectorAll('.nav-tabs a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    document.querySelectorAll('.nav-tabs a').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Update active nav on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section[id]');
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                if (scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-tabs a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

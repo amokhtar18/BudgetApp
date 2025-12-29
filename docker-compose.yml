@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  # Budget Application
+  budget-app:
+    build: .
+    container_name: budget-app
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - PG_HOST=${PG_HOST:-postgres}
+      - PG_PORT=${PG_PORT:-5432}
+      - PG_DATABASE=${PG_DATABASE:-budget_db}
+      - PG_USER=${PG_USER:-postgres}
+      - PG_PASSWORD=${PG_PASSWORD}
+      - SECRET_KEY=${SECRET_KEY}
+      - PASSWORD_SALT=${PASSWORD_SALT}
+    depends_on:
+      - postgres
+    networks:
+      - budget-network
+
+  # PostgreSQL Database (optional - remove if using external DB)
+  postgres:
+    image: postgres:15-alpine
+    container_name: budget-postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=${PG_DATABASE:-budget_db}
+      - POSTGRES_USER=${PG_USER:-postgres}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - budget-network
+
+  # Nginx Reverse Proxy (optional - for SSL/load balancing)
+  nginx:
+    image: nginx:alpine
+    container_name: budget-nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - budget-app
+    networks:
+      - budget-network
+
+volumes:
+  postgres_data:
+
+networks:
+  budget-network:
+    driver: bridge

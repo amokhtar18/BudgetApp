@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Assumptions Entry | HNH</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="images/Logo English.svg" alt="Logo" onerror="this.style.display='none'">
+                <h1>Budget Assumptions</h1>
+            </div>
+
+            <div class="header-controls">
+                <div class="year-selector">
+                    <label for="year-input">Year:</label>
+                    <input type="number" id="year-input" min="2020" max="2100" placeholder="Enter year">
+
+                    <span class="divider">or</span>
+
+                    <select id="year-select">
+                        <option value="">Select existing year</option>
+                    </select>
+
+                    <button id="load-btn" class="btn-primary">
+                        <i class="fas fa-download"></i> Load
+                    </button>
+                </div>
+
+                <div class="nav-link">
+                    <a href="daily-budget.html" class="btn-nav" title="Daily Budget Distribution">
+                        <i class="fas fa-chart-pie"></i> Daily Budget
+                    </a>
+                </div>
+
+                <div id="admin-link" class="admin-link hidden">
+                    <a href="users.html" class="btn-admin" title="User Management">
+                        <i class="fas fa-users-cog"></i>
+                    </a>
+                </div>
+
+                <div id="user-display" class="user-display">
+                    <!-- User info populated by JS -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Status Messages -->
+        <div id="status-message" class="status-message hidden"></div>
+
+        <!-- Loading Spinner -->
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Loading data...</p>
+        </div>
+
+        <!-- Main Layout -->
+        <div class="main-layout">
+
+            <!-- Sidebar -->
+            <aside id="filter-sidebar" class="filter-sidebar hidden">
+                <div class="sidebar-header">
+                    <h3><i class="fas fa-sliders-h"></i> Filters</h3>
+                </div>
+
+                <div class="filter-group">
+                    <label><i class="fas fa-chart-line"></i> Metric</label>
+                    <select id="filter-metric">
+                        <option value="all">All Metrics</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label><i class="fas fa-heartbeat"></i> Care Type</label>
+                    <select id="filter-caretype">
+                        <option value="all">All Care Types</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label><i class="fas fa-calendar-alt"></i> Quarter</label>
+                    <select id="filter-quarter">
+                        <option value="all">All Quarters</option>
+                        <option value="1">Q1</option>
+                        <option value="2">Q2</option>
+                        <option value="3">Q3</option>
+                        <option value="4">Q4</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label><i class="fas fa-building"></i> Branch</label>
+                    <select id="filter-branch">
+                        <option value="all">All Branches</option>
+                    </select>
+                </div>
+
+                <div class="filter-actions">
+                    <button class="btn-filter-clear" onclick="clearFilters()">
+                        <i class="fas fa-times"></i> Clear All Filters
+                    </button>
+                </div>
+
+                <div class="filter-stats" id="filter-stats">
+                    <span class="stat-item">
+                        <i class="fas fa-table"></i>
+                        <span id="visible-count">0</span> /
+                        <span id="total-count">0</span> rows
+                    </span>
+                </div>
+            </aside>
+
+            <!-- Sidebar Toggle (cleaned) -->
+            <button id="sidebar-expand-btn" class="sidebar-expand-btn hidden" onclick="toggleSidebar()"></button>
+
+            <!-- Main Content -->
+            <div class="content-area">
+
+                <!-- Year Banner -->
+                <div id="year-banner" class="year-banner hidden">
+                    <div class="banner-left">
+                        <span class="year-label">Year</span>
+                        <span id="selected-year" class="year-value">2026</span>
+                        <span id="data-status" class="status-badge">New</span>
+                    </div>
+
+                    <div class="banner-center">
+                        <button class="btn-scenario" id="scenario-best" data-scenario="best">Best Case</button>
+                        <button class="btn-scenario active" id="scenario-most" data-scenario="most">Most Likely</button>
+                        <button class="btn-scenario" id="scenario-worst" data-scenario="worst">Worst Case</button>
+                    </div>
+
+                    <div class="banner-right">
+                        <button id="save-all-btn" class="btn-save" disabled>
+                            <i class="fas fa-save"></i> Publish
+                        </button>
+                        <button id="view-history-btn" class="btn-history">
+                            <i class="fas fa-history"></i> History
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Data Form -->
+                <div id="data-form" class="data-form hidden">
+                    <div class="table-container">
+                        <table id="data-table">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" class="sticky-col">Metric</th>
+                                    <th rowspan="2">Care Type</th>
+                                    <th rowspan="2">Quarter</th>
+                                    <th rowspan="2">Input Type</th>
+                                    <th id="branch-colspan-header" colspan="6" class="branch-header">Values by Branch</th>
+                                </tr>
+                                <tr id="branch-header-row"></tr>
+                            </thead>
+
+                            <tbody id="table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- History Modal -->
+        <div id="history-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-history"></i> Change History</h2>
+                    <button class="close-btn" onclick="closeHistoryModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <table id="history-table">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Care Type</th>
+                                <th>Q</th>
+                                <th>Branch</th>
+                                <th>Value</th>
+                                <th>Version</th>
+                                <th>Current</th>
+                                <th>Updated At</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Hayat National Hospitals Budget Management System</p>
+    </footer>
+
+    <!-- JS -->
+    <script src="js/app.js"></script>
+
+</body>
+</html>

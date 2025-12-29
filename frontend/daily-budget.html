@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Budget Distribution | HNH</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/daily-budget.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="images/Logo English.svg" alt="Logo" onerror="this.style.display='none'">
+                <h1>Daily Budget Distribution</h1>
+            </div>
+
+            <div class="header-controls">
+                <a href="index.html" class="btn-nav">
+                    <i class="fas fa-calculator"></i> Budget Entry
+                </a>
+
+                <div id="admin-link" class="admin-link hidden">
+                    <a href="users.html" class="btn-admin" title="User Management">
+                        <i class="fas fa-users-cog"></i>
+                    </a>
+                </div>
+
+                <div id="user-display" class="user-display">
+                    <!-- User info populated by JS -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Status Messages -->
+        <div id="status-message" class="status-message hidden"></div>
+
+        <!-- Loading Spinner -->
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Processing data...</p>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" data-tab="distribution">
+                <i class="fas fa-chart-pie"></i> Budget Distribution
+            </button>
+        </div>
+
+        <!-- Tab Content: Budget Distribution -->
+        <div id="distribution-tab" class="tab-content active">
+            <div class="controls-section">
+                <div class="control-group">
+                    <label for="dist-year">Year</label>
+                    <select id="dist-year">
+                        <option value="">Select Year</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="dist-scenario">Scenario</label>
+                    <select id="dist-scenario">
+                        <option value="">Select Scenario</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="dist-branch">Branch</label>
+                    <select id="dist-branch">
+                        <option value="">All Branches</option>
+                    </select>
+                </div>
+
+                <div class="control-actions">
+                    <button id="calculate-btn" class="btn-primary">
+                        <i class="fas fa-calculator"></i> Calculate Distribution
+                    </button>
+                    <button id="export-btn" class="btn-success" disabled>
+                        <i class="fas fa-cloud-upload-alt"></i> Publish
+                    </button>
+                </div>
+            </div>
+
+            <!-- Summary Cards -->
+            <div id="summary-section" class="summary-cards-section hidden">
+                <!-- Overall Summary Row - Only 3 main cards -->
+                <div class="summary-cards-grid metrics-grid-3">
+                    <div class="summary-card-large revenue-card">
+                        <div class="card-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-label">Total Revenue</span>
+                            <span id="total-revenue" class="card-value">0</span>
+                        </div>
+                    </div>
+                    <div class="summary-card-large census-card">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-label">Total Census</span>
+                            <span id="total-census" class="card-value">0</span>
+                        </div>
+                    </div>
+                    <div class="summary-card-large episodes-card">
+                        <div class="card-icon">
+                            <i class="fas fa-user-injured"></i>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-label">Total Episodes</span>
+                            <span id="total-episodes" class="card-value">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Metrics Summary Table -->
+                <div class="metrics-summary-table-section">
+                    <h3><i class="fas fa-table"></i> Metrics Summary by Stay Type</h3>
+                    <table class="metrics-summary-table">
+                        <thead>
+                            <tr>
+                                <th>Stay Type</th>
+                                <th>Revenue</th>
+                                <th>Avg CPE</th>
+                                <th>ALOS</th>
+                                <th>Records</th>
+                            </tr>
+                        </thead>
+                        <tbody id="metrics-summary-tbody">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Branch Distribution Chart -->
+                <div class="chart-container">
+                    <h3><i class="fas fa-chart-bar"></i> Revenue Distribution by Branch</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="branch-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Download Section -->
+                <div class="download-section">
+                    <button id="download-csv" class="btn-secondary">
+                        <i class="fas fa-download"></i> Download Full Data (CSV)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hidden results section for data storage (used by CSV download) -->
+            <div id="results-section" class="hidden" style="display: none;">
+                <span id="results-count">0 records</span>
+            </div>
+        </div>
+
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Hayat National Hospitals Budget Management System</p>
+    </footer>
+
+    <!-- Publish Confirmation Modal -->
+    <div id="publish-modal" class="modal-overlay hidden">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-icon warning">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <h2>Confirm Publish</h2>
+                <p class="modal-subtitle">You are about to publish budget data to ClickHouse</p>
+            </div>
+            
+            <div class="modal-body">
+                <div class="publish-summary">
+                    <div class="summary-row">
+                        <span class="summary-label"><i class="fas fa-calendar"></i> Year</span>
+                        <span id="modal-year" class="summary-value">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label"><i class="fas fa-clock"></i> Period</span>
+                        <span id="modal-period" class="summary-value">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label"><i class="fas fa-chart-line"></i> Scenario</span>
+                        <span id="modal-scenario" class="summary-value badge">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label"><i class="fas fa-database"></i> Records</span>
+                        <span id="modal-records" class="summary-value highlight">-</span>
+                    </div>
+                </div>
+                
+                <div class="publish-totals">
+                    <h4><i class="fas fa-calculator"></i> Budget Totals</h4>
+                    <div class="totals-grid">
+                        <div class="total-item revenue">
+                            <span class="total-label">Total Revenue</span>
+                            <span id="modal-revenue" class="total-value">-</span>
+                        </div>
+                        <div class="total-item census">
+                            <span class="total-label">Total Census</span>
+                            <span id="modal-census" class="total-value">-</span>
+                        </div>
+                        <div class="total-item episodes">
+                            <span class="total-label">Total Episodes</span>
+                            <span id="modal-episodes" class="total-value">-</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="warning-box">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>This action will <strong>replace</strong> existing data for the selected period.</span>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button id="modal-cancel" class="btn-secondary">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+                <button id="modal-confirm" class="btn-danger">
+                    <i class="fas fa-cloud-upload-alt"></i> Publish Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="js/daily-budget.js"></script>
+</body>
+</html>

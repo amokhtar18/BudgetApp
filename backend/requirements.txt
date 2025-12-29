@@ -1,0 +1,9 @@
+flask==3.0.0
+flask-cors==4.0.0
+psycopg[binary]==3.2.3
+python-dotenv==1.0.0
+gunicorn==21.2.0; sys_platform != 'win32'
+waitress==2.1.2; sys_platform == 'win32'
+clickhouse-connect==0.7.19
+hijri-converter==2.3.1
+
