@@ -1365,6 +1365,546 @@ except Exception as e:
     print(f"Calendar tables initialization warning: {e}")
 
 
+# ============== Income Statement Module ==============
+
+def init_income_statement_tables():
+    """Initialize income statement assumptions tables."""
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    # Line items master table
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS budget.income_statement_line_items (
+            id SERIAL PRIMARY KEY,
+            code VARCHAR(20) UNIQUE NOT NULL,
+            name VARCHAR(100) NOT NULL,
+            category VARCHAR(50) NOT NULL,
+            display_order INTEGER NOT NULL,
+            is_user_input BOOLEAN DEFAULT FALSE,
+            calculation_formula VARCHAR(500),
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+    """)
+    
+    # Assumptions table
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS budget.income_statement_assumptions (
+            id SERIAL PRIMARY KEY,
+            branch_id INTEGER NOT NULL,
+            fiscal_year INTEGER NOT NULL,
+            scenario VARCHAR(20) NOT NULL DEFAULT 'most_likely',
+            line_item_code VARCHAR(50) NOT NULL,
+            assumption_percentage DECIMAL(10, 4) DEFAULT 0,
+            created_by INTEGER,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            is_published BOOLEAN DEFAULT FALSE,
+            version INTEGER DEFAULT 1,
+            UNIQUE(branch_id, fiscal_year, scenario, line_item_code, version)
+        );
+    """)
+    
+    # Budget calculated values table (monthly breakdown)
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS budget.income_statement_budget (
+            id SERIAL PRIMARY KEY,
+            branch_id INTEGER NOT NULL,
+            fiscal_year INTEGER NOT NULL,
+            scenario VARCHAR(20) NOT NULL DEFAULT 'most_likely',
+            line_item_code VARCHAR(50) NOT NULL,
+            assumption_percentage DECIMAL(10, 4) DEFAULT 0,
+            month_1 DECIMAL(18, 2) DEFAULT 0,
+            month_2 DECIMAL(18, 2) DEFAULT 0,
+            month_3 DECIMAL(18, 2) DEFAULT 0,
+            month_4 DECIMAL(18, 2) DEFAULT 0,
+            month_5 DECIMAL(18, 2) DEFAULT 0,
+            month_6 DECIMAL(18, 2) DEFAULT 0,
+            month_7 DECIMAL(18, 2) DEFAULT 0,
+            month_8 DECIMAL(18, 2) DEFAULT 0,
+            month_9 DECIMAL(18, 2) DEFAULT 0,
+            month_10 DECIMAL(18, 2) DEFAULT 0,
+            month_11 DECIMAL(18, 2) DEFAULT 0,
+            month_12 DECIMAL(18, 2) DEFAULT 0,
+            fy_total DECIMAL(18, 2) DEFAULT 0,
+            published_at TIMESTAMP,
+            published_by INTEGER,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            UNIQUE(branch_id, fiscal_year, scenario, line_item_code)
+        );
+    """)
+    
+    # Alter existing tables to increase line_item_code column size (if needed)
+    cur.execute("""
+        ALTER TABLE budget.income_statement_assumptions 
+        ALTER COLUMN line_item_code TYPE VARCHAR(50);
+    """)
+    cur.execute("""
+        ALTER TABLE budget.income_statement_budget 
+        ALTER COLUMN line_item_code TYPE VARCHAR(50);
+    """)
+    
+    # Create indexes
+    cur.execute("""
+        CREATE INDEX IF NOT EXISTS idx_is_assumptions_lookup 
+        ON budget.income_statement_assumptions(branch_id, fiscal_year, scenario, is_published);
+        
+        CREATE INDEX IF NOT EXISTS idx_is_budget_lookup 
+        ON budget.income_statement_budget(branch_id, fiscal_year, scenario);
+    """)
+    
+    conn.commit()
+    cur.close()
+    conn.close()
+
+# Initialize income statement tables
+try:
+    init_income_statement_tables()
+    print("Income statement tables initialized successfully")
+except Exception as e:
+    print(f"Income statement tables initialization warning: {e}")
+
+
+@app.route('/api/income-statement/years', methods=['GET'])
+@login_required
+def get_income_statement_years():
+    """Get list of years with income statement assumptions."""
+    try:
+        published_only = request.args.get('published', 'false').lower() == 'true'
+        
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        if published_only:
+            cur.execute("""
+                SELECT DISTINCT fiscal_year 
+                FROM budget.income_statement_assumptions 
+                WHERE is_published = TRUE
+                ORDER BY fiscal_year DESC
+            """)
+        else:
+            cur.execute("""
+                SELECT DISTINCT fiscal_year 
+                FROM budget.income_statement_assumptions 
+                ORDER BY fiscal_year DESC
+            """)
+        
+        years = [row['fiscal_year'] for row in cur.fetchall()]
+        
+        cur.close()
+        conn.close()
+        
+        return jsonify({'years': years})
+        
+    except Exception as e:
+        return jsonify({'error': str(e), 'years': []}), 500
+
+
+@app.route('/api/income-statement/revenue/<int:branch_id>/<int:year>', methods=['GET'])
+@login_required
+def get_income_statement_revenue(branch_id, year):
+    """Get revenue data from vw_Budget for income statement."""
+    try:
+        scenario = request.args.get('scenario', 'most_likely')
+        
+        ch_client = get_clickhouse_connection()
+        
+        # Query vw_Budget for revenue - sum by CareType (OP, ER) and StayType for inpatient
+        # First try to get total revenue by CareType
+        query = """
+            SELECT 
+                CareType,
+                StayType,
+                SUM(Revenue) as total_revenue
+            FROM budget.vw_Budget
+            WHERE Year = {year:UInt32} 
+              AND BranchId = {branch_id:UInt8}
+              AND scenario = {scenario:String}
+            GROUP BY CareType, StayType
+        """
+        
+        print(f"Income Statement Revenue Query - Year: {year}, Branch: {branch_id}, Scenario: {scenario}")
+        
+        result = ch_client.query(query, parameters={
+            'year': year,
+            'branch_id': branch_id,
+            'scenario': scenario
+        })
+        
+        revenue = {'IP': 0, 'OP': 0, 'ER': 0}
+        
+        print(f"Query returned {len(result.result_rows)} rows")
+        
+        for row in result.result_rows:
+            care_type = row[0]
+            stay_type = row[1]
+            total = float(row[2] or 0)
+            
+            print(f"  CareType: {care_type}, StayType: {stay_type}, Revenue: {total}")
+            
+            # Map based on CareType and StayType
+            if care_type == 'OP':
+                revenue['OP'] += total
+            elif care_type == 'ER':
+                revenue['ER'] += total
+            else:
+                # Inpatient includes Non-LTC and LTC stay types
+                revenue['IP'] += total
+        
+        print(f"Final revenue: IP={revenue['IP']}, OP={revenue['OP']}, ER={revenue['ER']}")
+        
+        # If no data found, try without scenario filter to check if data exists
+        if all(v == 0 for v in revenue.values()):
+            check_query = """
+                SELECT COUNT(*) as cnt, SUM(Revenue) as total
+                FROM budget.vw_Budget
+                WHERE Year = {year:UInt32} AND BranchId = {branch_id:UInt8}
+            """
+            check_result = ch_client.query(check_query, parameters={'year': year, 'branch_id': branch_id})
+            if check_result.result_rows:
+                cnt, total = check_result.result_rows[0]
+                print(f"Check without scenario filter: {cnt} rows, total revenue: {total}")
+        
+        return jsonify({
+            'success': True,
+            'revenue': revenue,
+            'branch_id': branch_id,
+            'year': year,
+            'scenario': scenario
+        })
+        
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({
+            'error': str(e),
+            'revenue': {'IP': 0, 'OP': 0, 'ER': 0}
+        }), 500
+
+
+@app.route('/api/income-statement/revenue-monthly/<int:branch_id>/<int:year>', methods=['GET'])
+@login_required
+def get_income_statement_revenue_monthly(branch_id, year):
+    """Get monthly revenue data from budget_data (daily published budget) for income statement."""
+    try:
+        scenario = request.args.get('scenario', 'most_likely')
+        
+        ch_client = get_clickhouse_connection()
+        
+        # Query budget_data for monthly revenue aggregated by CareType
+        # budget_data has TableDate which we can extract month from
+        query = """
+            SELECT 
+                toMonth(TableDate) as Month_,
+                CareType,
+                SUM(Revenue) as total_revenue
+            FROM budget.budget_data
+            WHERE Year = {year:UInt32} 
+              AND BranchId = {branch_id:UInt8}
+              AND Scenario = {scenario:String}
+              AND is_last_value = 1
+            GROUP BY toMonth(TableDate), CareType
+            ORDER BY Month_, CareType
+        """
+        
+        print(f"Monthly Revenue Query - Year: {year}, Branch: {branch_id}, Scenario: {scenario}")
+        
+        result = ch_client.query(query, parameters={
+            'year': year,
+            'branch_id': branch_id,
+            'scenario': scenario
+        })
+        
+        print(f"Query returned {len(result.result_rows)} rows")
+        
+        # Initialize revenue structure: { month: { IP, OP, ER } }
+        monthly_revenue = {}
+        for m in range(1, 13):
+            monthly_revenue[m] = {'IP': 0, 'OP': 0, 'ER': 0}
+        
+        for row in result.result_rows:
+            month = int(row[0])
+            care_type = row[1]
+            total = float(row[2] or 0)
+            
+            print(f"  Month: {month}, CareType: {care_type}, Revenue: {total:,.0f}")
+            
+            # Map based on CareType
+            if care_type == 'OP':
+                monthly_revenue[month]['OP'] += total
+            elif care_type == 'ER':
+                monthly_revenue[month]['ER'] += total
+            else:
+                # Inpatient includes all other care types
+                monthly_revenue[month]['IP'] += total
+        
+        # Calculate totals for logging
+        total_ip = sum(m['IP'] for m in monthly_revenue.values())
+        total_op = sum(m['OP'] for m in monthly_revenue.values())
+        total_er = sum(m['ER'] for m in monthly_revenue.values())
+        print(f"Total Revenue - IP: {total_ip:,.0f}, OP: {total_op:,.0f}, ER: {total_er:,.0f}, Total: {total_ip + total_op + total_er:,.0f}")
+        
+        # If no data found, check without is_last_value filter
+        if all(m['IP'] == 0 and m['OP'] == 0 and m['ER'] == 0 for m in monthly_revenue.values()):
+            check_query = """
+                SELECT COUNT(*) as cnt, SUM(Revenue) as total
+                FROM budget.budget_data
+                WHERE Year = {year:UInt32} AND BranchId = {branch_id:UInt8} AND Scenario = {scenario:String}
+            """
+            check_result = ch_client.query(check_query, parameters={
+                'year': year, 
+                'branch_id': branch_id,
+                'scenario': scenario
+            })
+            if check_result.result_rows:
+                cnt, total = check_result.result_rows[0]
+                print(f"Check without is_last_value filter: {cnt} rows, total revenue: {total:,.0f}" if total else f"Check without filter: {cnt} rows, no revenue")
+        
+        return jsonify({
+            'success': True,
+            'monthly_revenue': monthly_revenue,
+            'branch_id': branch_id,
+            'year': year,
+            'scenario': scenario
+        })
+        
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({
+            'error': str(e),
+            'monthly_revenue': {}
+        }), 500
+
+
+@app.route('/api/income-statement/assumptions', methods=['GET'])
+@login_required
+def get_income_statement_assumptions():
+    """Get existing assumptions for a branch/year."""
+    try:
+        branch_id = request.args.get('branch_id', type=int)
+        year = request.args.get('year', type=int)
+        scenario = request.args.get('scenario', 'most_likely')
+        
+        if not branch_id or not year:
+            return jsonify({'error': 'branch_id and year are required'}), 400
+        
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        # First get the max version
+        cur.execute("""
+            SELECT MAX(version) as max_version
+            FROM budget.income_statement_assumptions 
+            WHERE branch_id = %s AND fiscal_year = %s AND scenario = %s
+        """, (branch_id, year, scenario))
+        
+        version_row = cur.fetchone()
+        max_version = version_row['max_version'] if version_row and version_row['max_version'] else 0
+        
+        cur.execute("""
+            SELECT line_item_code, assumption_percentage, is_published, updated_at
+            FROM budget.income_statement_assumptions
+            WHERE branch_id = %s AND fiscal_year = %s AND scenario = %s
+              AND version = (
+                  SELECT MAX(version) 
+                  FROM budget.income_statement_assumptions 
+                  WHERE branch_id = %s AND fiscal_year = %s AND scenario = %s
+              )
+        """, (branch_id, year, scenario, branch_id, year, scenario))
+        
+        rows = cur.fetchall()
+        
+        assumptions = []
+        is_published = False
+        last_updated = None
+        
+        for row in rows:
+            assumptions.append({
+                'line_item_code': row['line_item_code'],
+                'assumption_percentage': float(row['assumption_percentage'] or 0)
+            })
+            is_published = row['is_published']
+            if row['updated_at']:
+                last_updated = row['updated_at'].isoformat() if hasattr(row['updated_at'], 'isoformat') else str(row['updated_at'])
+        
+        cur.close()
+        conn.close()
+        
+        return jsonify({
+            'success': True,
+            'assumptions': assumptions,
+            'is_published': is_published,
+            'version': max_version,
+            'last_updated': last_updated,
+            'branch_id': branch_id,
+            'year': year,
+            'scenario': scenario
+        })
+        
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/income-statement/assumptions', methods=['POST'])
+@login_required
+def save_income_statement_assumptions():
+    """Save or update income statement assumptions for multiple branches."""
+    try:
+        data = request.json
+        is_published = data.get('publish', False)
+        assumptions_list = data.get('assumptions', [])
+        
+        if not assumptions_list:
+            return jsonify({'error': 'assumptions list is required'}), 400
+        
+        user_id = session.get('user_id')
+        
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        # Group assumptions by branch to handle versioning per branch
+        branches_data = {}
+        for assumption in assumptions_list:
+            branch_id = assumption.get('branch_id')
+            year = assumption.get('year')
+            scenario = assumption.get('scenario', 'most_likely')
+            key = (branch_id, year, scenario)
+            if key not in branches_data:
+                branches_data[key] = []
+            branches_data[key].append(assumption)
+        
+        # Process each branch separately
+        for (branch_id, year, scenario), branch_assumptions in branches_data.items():
+            # Get current max version for this branch
+            cur.execute("""
+                SELECT COALESCE(MAX(version), 0) as max_version
+                FROM budget.income_statement_assumptions
+                WHERE branch_id = %s AND fiscal_year = %s AND scenario = %s
+            """, (branch_id, year, scenario))
+            
+            current_version = cur.fetchone()['max_version']
+            new_version = current_version + 1 if is_published else max(current_version, 1)
+            
+            for assumption in branch_assumptions:
+                line_item_code = assumption.get('line_item_code')
+                # Accept both assumption_percentage and assumption_value
+                percentage = assumption.get('assumption_percentage') or assumption.get('assumption_value', 0)
+                
+                if is_published:
+                    # Insert new version
+                    cur.execute("""
+                        INSERT INTO budget.income_statement_assumptions 
+                        (branch_id, fiscal_year, scenario, line_item_code, assumption_percentage, 
+                         created_by, is_published, version, updated_at)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
+                    """, (branch_id, year, scenario, line_item_code, percentage, user_id, True, new_version))
+                else:
+                    # Upsert current version (draft)
+                    cur.execute("""
+                        INSERT INTO budget.income_statement_assumptions 
+                        (branch_id, fiscal_year, scenario, line_item_code, assumption_percentage, 
+                         created_by, is_published, version, updated_at)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
+                        ON CONFLICT (branch_id, fiscal_year, scenario, line_item_code, version)
+                        DO UPDATE SET 
+                            assumption_percentage = EXCLUDED.assumption_percentage,
+                            updated_at = CURRENT_TIMESTAMP
+                    """, (branch_id, year, scenario, line_item_code, percentage, user_id, False, new_version))
+        
+        conn.commit()
+        cur.close()
+        conn.close()
+        
+        return jsonify({
+            'success': True,
+            'message': 'Assumptions published successfully!' if is_published else 'Draft saved successfully!'
+        })
+        
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/income-statement/budget', methods=['GET'])
+@login_required
+def get_income_statement_budget():
+    """Get calculated budget data for display."""
+    try:
+        year = request.args.get('year', type=int)
+        branch_id = request.args.get('branch_id', type=int)
+        consolidated = request.args.get('consolidated', 'false').lower() == 'true'
+        scenario = request.args.get('scenario', 'most_likely')
+        
+        if not year:
+            return jsonify({'error': 'year is required'}), 400
+        
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        if consolidated:
+            # Get aggregated data across all branches
+            cur.execute("""
+                SELECT 
+                    line_item_code,
+                    AVG(assumption_percentage) as assumption_percentage,
+                    SUM(month_1) as month_1, SUM(month_2) as month_2, SUM(month_3) as month_3,
+                    SUM(month_4) as month_4, SUM(month_5) as month_5, SUM(month_6) as month_6,
+                    SUM(month_7) as month_7, SUM(month_8) as month_8, SUM(month_9) as month_9,
+                    SUM(month_10) as month_10, SUM(month_11) as month_11, SUM(month_12) as month_12,
+                    SUM(fy_total) as fy_total
+                FROM budget.income_statement_budget
+                WHERE fiscal_year = %s AND scenario = %s
+                GROUP BY line_item_code
+            """, (year, scenario))
+        else:
+            cur.execute("""
+                SELECT 
+                    line_item_code, assumption_percentage,
+                    month_1, month_2, month_3, month_4, month_5, month_6,
+                    month_7, month_8, month_9, month_10, month_11, month_12,
+                    fy_total
+                FROM budget.income_statement_budget
+                WHERE branch_id = %s AND fiscal_year = %s AND scenario = %s
+            """, (branch_id, year, scenario))
+        
+        rows = cur.fetchall()
+        
+        budget = {}
+        for row in rows:
+            budget[row['line_item_code']] = {
+                'assumption': float(row['assumption_percentage'] or 0),
+                'month_1': float(row['month_1'] or 0),
+                'month_2': float(row['month_2'] or 0),
+                'month_3': float(row['month_3'] or 0),
+                'month_4': float(row['month_4'] or 0),
+                'month_5': float(row['month_5'] or 0),
+                'month_6': float(row['month_6'] or 0),
+                'month_7': float(row['month_7'] or 0),
+                'month_8': float(row['month_8'] or 0),
+                'month_9': float(row['month_9'] or 0),
+                'month_10': float(row['month_10'] or 0),
+                'month_11': float(row['month_11'] or 0),
+                'month_12': float(row['month_12'] or 0),
+                'fy_total': float(row['fy_total'] or 0)
+            }
+        
+        cur.close()
+        conn.close()
+        
+        return jsonify({
+            'success': True,
+            'budget': budget,
+            'year': year,
+            'branch_id': branch_id,
+            'consolidated': consolidated,
+            'scenario': scenario
+        })
+        
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
+
+
 # ============== Daily Budget Distribution Calculation ==============
 
 @app.route('/api/daily-budget/calculate', methods=['POST'])
@@ -1816,7 +2356,7 @@ def publish_to_clickhouse():
             Scenario String,
             CareType String,
             StayType String,
-            Speciality Nullable(String),
+            Speciality String,
             Census Float64,
             Episodes Float64,
             CPE Float64,
@@ -1846,6 +2386,7 @@ def publish_to_clickhouse():
         from datetime import date as dt_date
         
         rows = []
+        skipped_records = 0
         for record in detail_data:
             # Convert string date to date object for ClickHouse Date32
             table_date = record['table_date']
@@ -1859,34 +2400,79 @@ def publish_to_clickhouse():
                 month = table_date.month if hasattr(table_date, 'month') else int(record['table_date'].split('-')[1])
                 record_quarter = (month - 1) // 3 + 1
             
+            # Ensure non-nullable string columns are not None (replace with empty string)
+            care_type = record.get('care_type') or ''
+            stay_type = record.get('stay_type') or ''
+            speciality = record.get('speciality') or ''  # Replace None with empty string
+            
+            # Skip records with missing required fields
+            if not care_type or not stay_type:
+                skipped_records += 1
+                continue
+            
             rows.append([
                 record['branch_id'],
                 table_date,
                 year,
                 record_quarter,
                 scenario,
-                record['care_type'],
-                record['stay_type'],
-                record.get('speciality'),
-                record['census'],
-                record.get('episodes', 0),
-                record['cpe'],
-                record['alos'],
-                record['revenue'],
+                care_type,
+                stay_type,
+                speciality,
+                float(record.get('census', 0) or 0),
+                float(record.get('episodes', 0) or 0),
+                float(record.get('cpe', 0) or 0),
+                float(record.get('alos', 0) or 0),
+                float(record.get('revenue', 0) or 0),
                 1,  # is_last_value = 1 for new records
                 created_by
             ])
         
+        if skipped_records > 0:
+            print(f"Skipped {skipped_records} records with missing required fields")
+        
         print(f"Publishing {len(rows)} records to ClickHouse...")
         
-        # Insert data
-        ch_client.insert(
-            'budget.budget_data',
-            rows,
-            column_names=['BranchId', 'TableDate', 'Year', 'Quarter', 'Scenario', 
-                         'CareType', 'StayType', 'Speciality',
-                         'Census', 'Episodes', 'CPE', 'ALOS', 'Revenue', 'is_last_value', 'CreatedBy']
-        )
+        # Insert data in batches to handle large datasets and identify problematic records
+        batch_size = 10000
+        total_inserted = 0
+        failed_batches = []
+        
+        for i in range(0, len(rows), batch_size):
+            batch = rows[i:i + batch_size]
+            batch_num = i // batch_size + 1
+            try:
+                ch_client.insert(
+                    'budget.budget_data',
+                    batch,
+                    column_names=['BranchId', 'TableDate', 'Year', 'Quarter', 'Scenario', 
+                                 'CareType', 'StayType', 'Speciality',
+                                 'Census', 'Episodes', 'CPE', 'ALOS', 'Revenue', 'is_last_value', 'CreatedBy']
+                )
+                total_inserted += len(batch)
+                print(f"Batch {batch_num}: Inserted {len(batch)} records (total: {total_inserted})")
+            except Exception as batch_err:
+                print(f"Batch {batch_num} failed: {str(batch_err)}")
+                failed_batches.append({'batch': batch_num, 'start': i, 'end': i + len(batch), 'error': str(batch_err)})
+                
+                # Try to insert records one by one to identify problematic ones
+                for j, row in enumerate(batch):
+                    try:
+                        ch_client.insert(
+                            'budget.budget_data',
+                            [row],
+                            column_names=['BranchId', 'TableDate', 'Year', 'Quarter', 'Scenario', 
+                                         'CareType', 'StayType', 'Speciality',
+                                         'Census', 'Episodes', 'CPE', 'ALOS', 'Revenue', 'is_last_value', 'CreatedBy']
+                        )
+                        total_inserted += 1
+                    except Exception as row_err:
+                        print(f"  Row {i + j} failed: {row[:8]}... Error: {str(row_err)[:100]}")
+        
+        if failed_batches:
+            print(f"Warning: {len(failed_batches)} batches had issues")
+        
+        print(f"Total inserted: {total_inserted} out of {len(rows)} records")
         
         # Verify actual count after insert
         verify_query = """
