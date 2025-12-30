@@ -102,8 +102,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         return;
     }
     
-    // Set user info
-    document.getElementById('userName').textContent = currentUser?.full_name || currentUser?.username || '';
+    // Set user info with logout button
+    updateUserDisplay();
+    updateAdminLink();
     
     // Initialize controls
     initializeControls();
@@ -114,6 +115,54 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Restore session data if available
     restoreSessionData();
 });
+
+/**
+ * Update user display in header with logout button
+ */
+function updateUserDisplay() {
+    const userDisplay = document.getElementById('user-display');
+    if (userDisplay && currentUser) {
+        const branchInfo = currentUser.branch_id 
+            ? `<span class="branch-info"><i class="fas fa-building"></i> ${currentUser.branch_name || ''}</span>` 
+            : '';
+        userDisplay.innerHTML = `
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.2rem;">
+                <span class="user-name"><i class="fas fa-user-circle"></i> ${currentUser.full_name || currentUser.username}</span>
+                ${branchInfo}
+            </div>
+            <button class="btn-logout" onclick="logout()" title="Logout">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        `;
+    }
+}
+
+/**
+ * Show admin link if user is admin
+ */
+function updateAdminLink() {
+    const adminLink = document.getElementById('admin-link');
+    if (adminLink && currentUser && currentUser.role === 'admin') {
+        adminLink.classList.remove('hidden');
+    }
+}
+
+/**
+ * Logout user
+ */
+async function logout() {
+    try {
+        await fetch('/api/auth/logout', {
+            method: 'POST',
+            credentials: 'include'
+        });
+        sessionStorage.removeItem('incomeStatementState');
+        window.location.href = '/login.html';
+    } catch (err) {
+        console.error('Logout failed:', err);
+        window.location.href = '/login.html';
+    }
+}
 
 /**
  * Check if user is authenticated
@@ -140,7 +189,6 @@ function initializeControls() {
     const yearInput = document.getElementById('year-input');
     const yearSelect = document.getElementById('year-select');
     const loadBtn = document.getElementById('load-btn');
-    const scenarioSelect = document.getElementById('scenarioSelect');
     const saveDraftBtn = document.getElementById('saveDraftBtn');
     const publishBtn = document.getElementById('publishBtn');
     const viewBudgetBtn = document.getElementById('viewBudgetBtn');
@@ -171,15 +219,6 @@ function initializeControls() {
     loadBtn.addEventListener('click', async function() {
         await loadData();
         updateYearBadge();
-    });
-    
-    // Scenario select change - reload data if already loaded
-    scenarioSelect.addEventListener('change', async function() {
-        currentScenario = this.value;
-        // Only reload if data was already loaded (check if revenueData has data)
-        if (Object.keys(revenueData).length > 0) {
-            await loadData();
-        }
     });
     
     // Save Draft button
@@ -1195,13 +1234,6 @@ function restoreSessionData() {
             currentYear = sessionData.currentYear;
             const yearInput = document.getElementById('year-input');
             if (yearInput) yearInput.value = currentYear;
-        }
-        
-        // Restore scenario
-        if (sessionData.currentScenario) {
-            currentScenario = sessionData.currentScenario;
-            const scenarioSelect = document.getElementById('scenarioSelect');
-            if (scenarioSelect) scenarioSelect.value = currentScenario;
         }
         
         // Restore data
