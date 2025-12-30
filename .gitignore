@@ -4,3 +4,10 @@ env/
 .venv/
 .env/
 .env.production/
+
+# Environment files
+env.production
+
+# Docker files
+Dockerfile
+docker-compose.yml
