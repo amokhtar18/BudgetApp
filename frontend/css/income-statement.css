@@ -1,0 +1,595 @@
+/* Income Statement Assumptions - CSS */
+/* Extends the main style.css theme */
+
+/* Full-width maximized layout */
+.is-content {
+    padding: 0.5rem;
+    max-width: 100%;
+    margin: 0;
+}
+
+/* Page-specific header adjustments */
+.is-header-controls {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.is-selector-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.is-selector-group label {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.is-selector-group select {
+    padding: 0.5rem 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    min-width: 150px;
+}
+
+.is-selector-group select option {
+    background: var(--primary);
+    color: white;
+}
+
+.is-selector-group select:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Section Cards */
+.is-section {
+    background: var(--bg-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.is-section-header {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.is-section-header h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.is-section-header .section-total {
+    font-size: 1rem;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius-md);
+}
+
+/* Income Statement Table */
+.is-table-container {
+    overflow-x: auto;
+    padding: 1rem;
+}
+
+.is-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.is-table th,
+.is-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.is-table th {
+    background: var(--bg-light);
+    font-weight: 600;
+    color: var(--text-dark);
+    white-space: nowrap;
+}
+
+.is-table th.col-line-item {
+    width: 35%;
+}
+
+.is-table th.col-assumption {
+    width: 15%;
+    text-align: center;
+}
+
+.is-table th.col-fy-total {
+    width: 120px;
+    text-align: right;
+}
+
+/* Branch column styling */
+.is-table th.col-branch {
+    width: 110px;
+    text-align: center;
+    background: rgba(12, 90, 145, 0.1);
+}
+
+.is-table td.branch-assumption,
+.is-table td.calculated-value,
+.is-table td.revenue-value {
+    text-align: center;
+}
+
+.is-table td.revenue-value {
+    color: var(--success);
+    font-weight: 500;
+}
+
+.is-table td.calculated-value {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Section header rows */
+.is-table tr.section-header {
+    background: var(--primary);
+}
+
+.is-table tr.section-header td {
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    border-bottom: none;
+}
+
+.is-table tr.section-header td.section-title {
+    font-size: 0.95rem;
+    padding: 0.75rem 1rem;
+}
+
+/* Calculated row styling */
+.is-table tr.calculated-row {
+    background: rgba(12, 90, 145, 0.08);
+}
+
+.is-table tr.calculated-row td {
+    font-weight: 600;
+}
+
+.is-table th.col-calculated {
+    width: 30%;
+    text-align: right;
+}
+
+/* Row Types */
+.is-table tr.row-header {
+    background: var(--primary);
+    color: white;
+}
+
+.is-table tr.row-header td {
+    font-weight: 600;
+    border-bottom: none;
+}
+
+.is-table tr.row-subtotal {
+    background: rgba(12, 90, 145, 0.08);
+    font-weight: 600;
+}
+
+.is-table tr.row-total {
+    background: var(--primary-light);
+    color: white;
+    font-weight: 700;
+}
+
+.is-table tr.row-total td {
+    border-bottom: none;
+}
+
+.is-table tr.row-calculated {
+    background: rgba(16, 185, 129, 0.08);
+}
+
+.is-table tr.row-spacer {
+    height: 20px;
+    background: transparent;
+}
+
+.is-table tr.row-spacer td {
+    border-bottom: none;
+}
+
+.is-table tr:hover:not(.row-header):not(.row-total):not(.row-spacer) {
+    background: rgba(12, 90, 145, 0.05);
+}
+
+/* Line Item Name Column */
+.line-item-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.line-item-name.indent-1 {
+    padding-left: 1.5rem;
+}
+
+.line-item-name.indent-2 {
+    padding-left: 3rem;
+}
+
+.line-item-icon {
+    color: var(--primary);
+    font-size: 0.85rem;
+    width: 20px;
+    text-align: center;
+}
+
+/* Assumption Input */
+.assumption-input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.assumption-input {
+    width: 80px;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    text-align: right;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.assumption-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(12, 90, 145, 0.1);
+}
+
+.assumption-input:disabled {
+    background: var(--bg-light);
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+.assumption-input.modified {
+    border-color: var(--warning);
+    background: var(--warning-light);
+}
+
+.assumption-suffix {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* Value Display */
+.value-display {
+    text-align: right;
+    font-weight: 500;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.value-display.positive {
+    color: var(--success);
+}
+
+.value-display.negative {
+    color: var(--danger);
+}
+
+.value-display.calculated {
+    color: var(--primary);
+    font-style: italic;
+}
+
+/* Revenue Data Badge */
+.revenue-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.revenue-badge i {
+    font-size: 0.7rem;
+}
+
+/* Action Buttons */
+.is-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    background: var(--bg-light);
+    border-top: 1px solid var(--border);
+}
+
+.btn-publish {
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+    box-shadow: var(--shadow);
+}
+
+.btn-publish:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-publish:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-draft {
+    background: white;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    padding: 0.75rem 2rem;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+}
+
+.btn-draft:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-secondary {
+    background: var(--bg-light);
+    color: var(--text-dark);
+    border: 2px solid var(--border);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+    background: var(--border);
+}
+
+/* Summary Panel */
+.is-summary-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-light);
+    border-radius: var(--radius-lg);
+    margin-bottom: 1.5rem;
+}
+
+.summary-card {
+    background: white;
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.summary-card .label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.summary-card .value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.summary-card .value.positive {
+    color: var(--success);
+}
+
+.summary-card .value.negative {
+    color: var(--danger);
+}
+
+/* Budget Review Page Specific */
+.budget-view-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.view-toggle {
+    display: flex;
+    background: var(--bg-light);
+    border-radius: var(--radius-md);
+    padding: 0.25rem;
+}
+
+.view-toggle button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s;
+}
+
+.view-toggle button.active {
+    background: var(--primary);
+    color: white;
+}
+
+/* Monthly breakdown table (for budget review) */
+.monthly-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.monthly-table th,
+.monthly-table td {
+    padding: 0.6rem 0.75rem;
+    text-align: right;
+    border: 1px solid var(--border);
+}
+
+.monthly-table th {
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+}
+
+.monthly-table th:first-child,
+.monthly-table td:first-child {
+    text-align: left;
+    position: sticky;
+    left: 0;
+    background: white;
+    z-index: 1;
+}
+
+.monthly-table th:first-child {
+    background: var(--primary);
+}
+
+.monthly-table tr:nth-child(even) td {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.monthly-table tr:nth-child(even) td:first-child {
+    background: #fafafa;
+}
+
+/* No Data State */
+.no-data-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-muted);
+}
+
+.no-data-state i {
+    font-size: 4rem;
+    color: var(--border-dark);
+    margin-bottom: 1rem;
+}
+
+.no-data-state h3 {
+    font-size: 1.25rem;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.no-data-state p {
+    font-size: 0.95rem;
+}
+
+/* Loading State */
+.is-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    color: var(--text-muted);
+}
+
+.is-loading .spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .is-content {
+        padding: 1rem;
+    }
+    
+    .is-header-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .is-selector-group {
+        width: 100%;
+    }
+    
+    .is-selector-group select {
+        flex: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .is-table th.col-assumption,
+    .is-table th.col-fy-total {
+        width: auto;
+    }
+    
+    .assumption-input {
+        width: 60px;
+    }
+    
+    .is-actions {
+        flex-direction: column;
+    }
+    
+    .is-actions button {
+        width: 100%;
+        justify-content: center;
+    }
+}

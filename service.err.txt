@@ -1,0 +1,3500 @@
+INFO:waitress:Serving on http://0.0.0.0:5050
+INFO:waitress:Serving on http://0.0.0.0:5050
+INFO:waitress:Serving on http://0.0.0.0:5050
+INFO:waitress:Serving on http://0.0.0.0:5050
+INFO:waitress:Serving on http://0.0.0.0:5050
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Error: Bad module 'wsgi'
+
+Usage:
+
+    __main__.py [OPTS] MODULE:OBJECT
+
+Standard options:
+
+    --help
+        Show this information.
+
+    --call
+        Call the given object to get the WSGI application.
+
+    --host=ADDR
+        Hostname or IP address on which to listen, default is '0.0.0.0',
+        which means "all IP addresses on this host".
+
+        Note: May not be used together with --listen
+
+    --port=PORT
+        TCP port on which to listen, default is '8080'
+
+        Note: May not be used together with --listen
+
+    --listen=ip:port
+        Tell waitress to listen on an ip port combination.
+
+        Example:
+
+            --listen=127.0.0.1:8080
+            --listen=[::1]:8080
+            --listen=*:8080
+
+        This option may be used multiple times to listen on multiple sockets.
+        A wildcard for the hostname is also supported and will bind to both
+        IPv4/IPv6 depending on whether they are enabled or disabled.
+
+    --[no-]ipv4
+        Toggle on/off IPv4 support.
+
+        Example:
+
+            --no-ipv4
+
+        This will disable IPv4 socket support. This affects wildcard matching
+        when generating the list of sockets.
+
+    --[no-]ipv6
+        Toggle on/off IPv6 support.
+
+        Example:
+
+            --no-ipv6
+
+        This will turn on IPv6 socket support. This affects wildcard matching
+        when generating a list of sockets.
+
+    --unix-socket=PATH
+        Path of Unix socket. If a socket path is specified, a Unix domain
+        socket is made instead of the usual inet domain socket.
+
+        Not available on Windows.
+
+    --unix-socket-perms=PERMS
+        Octal permissions to use for the Unix domain socket, default is
+        '600'.
+
+    --url-scheme=STR
+        Default wsgi.url_scheme value, default is 'http'.
+
+    --url-prefix=STR
+        The ``SCRIPT_NAME`` WSGI environment value.  Setting this to anything
+        except the empty string will cause the WSGI ``SCRIPT_NAME`` value to be
+        the value passed minus any trailing slashes you add, and it will cause
+        the ``PATH_INFO`` of any request which is prefixed with this value to
+        be stripped of the prefix.  Default is the empty string.
+
+    --ident=STR
+        Server identity used in the 'Server' header in responses. Default
+        is 'waitress'.
+
+Tuning options:
+
+    --threads=INT
+        Number of threads used to process application logic, default is 4.
+
+    --backlog=INT
+        Connection backlog for the server. Default is 1024.
+
+    --recv-bytes=INT
+        Number of bytes to request when calling socket.recv(). Default is
+        8192.
+
+    --send-bytes=INT
+        Number of bytes to send to socket.send(). Default is 18000.
+        Multiples of 9000 should avoid partly-filled TCP packets.
+
+    --outbuf-overflow=INT
+        A temporary file should be created if the pending output is larger
+        than this. Default is 1048576 (1MB).
+
+    --outbuf-high-watermark=INT
+        The app_iter will pause when pending output is larger than this value
+        and will resume once enough data is written to the socket to fall below
+        this threshold. Default is 16777216 (16MB).
+
+    --inbuf-overflow=INT
+        A temporary file should be created if the pending input is larger
+        than this. Default is 524288 (512KB).
+
+    --connection-limit=INT
+        Stop creating new channels if too many are already active.
+        Default is 100.
+
+    --cleanup-interval=INT
+        Minimum seconds between cleaning up inactive channels. Default
+        is 30. See '--channel-timeout'.
+
+    --channel-timeout=INT
+        Maximum number of seconds to leave inactive connections open.
+        Default is 120. 'Inactive' is defined as 'has received no data
+        from the client and has sent no data to the client'.
+
+    --[no-]log-socket-errors
+        Toggle whether premature client disconnect tracebacks ought to be
+        logged. On by default.
+
+    --max-request-header-size=INT
+        Maximum size of all request headers combined. Default is 262144
+        (256KB).
+
+    --max-request-body-size=INT
+        Maximum size of request body. Default is 1073741824 (1GB).
+
+    --[no-]expose-tracebacks
+        Toggle whether to expose tracebacks of unhandled exceptions to the
+        client. Off by default.
+
+    --asyncore-loop-timeout=INT
+        The timeout value in seconds passed to asyncore.loop(). Default is 1.
+
+    --asyncore-use-poll
+        The use_poll argument passed to ``asyncore.loop()``. Helps overcome
+        open file descriptors limit. Default is False.
+
+    --channel-request-lookahead=INT
+        Allows channels to stay readable and buffer more requests up to the
+        given maximum even if a request is already being processed. This allows
+        detecting if a client closed the connection while its request is being
+        processed. Default is 0.
+
+
+There was an exception (ModuleNotFoundError) importing your module.
+
+It had these arguments: 
+1. No module named 'hijri_converter'
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 189, in _run_module_as_main
+  File "<frozen runpy>", line 148, in _get_module_details
+  File "<frozen runpy>", line 112, in _get_module_details
+  File "D:\Budget App\venv\Lib\site-packages\waitress\__init__.py", line 3, in <module>
+    from waitress.server import create_server
+  File "D:\Budget App\venv\Lib\site-packages\waitress\server.py", line 20, in <module>
+    from waitress import trigger
+  File "D:\Budget App\venv\Lib\site-packages\waitress\trigger.py", line 20, in <module>
+    from . import wasyncore
+  File "D:\Budget App\venv\Lib\site-packages\waitress\wasyncore.py", line 78, in <module>
+    from . import compat, utilities
+  File "D:\Budget App\venv\Lib\site-packages\waitress\compat.py", line 10, in <module>
+    WIN = platform.system() == "Windows"
+          ~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\platform.py", line 1073, in system
+    return uname().system
+           ~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\platform.py", line 999, in uname
+    release, version, csd, ptype = win32_ver()
+                                   ~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\platform.py", line 450, in win32_ver
+    version, csd, ptype, is_client = _win32_ver(version, csd, ptype)
+                                     ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\platform.py", line 391, in _win32_ver
+    (version, product_type, ptype, spmajor, spminor)  = _wmi_query(
+                                                        ~~~~~~~~~~^
+        'OS',
+        ^^^^^
+    ...<4 lines>...
+        'ServicePackMinorVersion',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\platform.py", line 330, in _wmi_query
+    data = _wmi.exec_query("SELECT {} FROM {}".format(
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        ",".join(keys),
+        ^^^^^^^^^^^^^^^
+        table,
+        ^^^^^^
+    )).split("\0")
+    ^^
+KeyboardInterrupt
+Unable to connect optimized C data functions [No module named 'clickhouse_connect.driverc.buffer'], falling back to pure Python
+INFO:waitress:Serving on http://0.0.0.0:5050
+Traceback (most recent call last):
+  File "D:\Budget App\backend\app.py", line 1422, in calculate_daily_budget
+    budget_result = ch_client.query(budget_query, parameters=query_params)
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\client.py", line 209, in query
+    return self._query_with_context(query_context)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 225, in _query_with_context
+    response = self._raw_request(body,
+                                 params,
+    ...<3 lines>...
+                                 fields=fields,
+                                 server_wait=not context.streaming)
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 454, in _raw_request
+    self._error_handler(response)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 377, in _error_handler
+    raise OperationalError(err_str) if retried else DatabaseError(err_str) from None
+clickhouse_connect.driver.exceptions.DatabaseError: HTTPDriver for http://172.22.25.165:8123 returned response code 500)
+ Code: 153. DB::Exception: Division by zero: while executing 'FUNCTION divide(sum(__table2.Revenue) :: 2, sum(__table2.Episode_Forecast) :: 1) -> divide(sum(__table2.Revenue), sum(__table2.Episode_Forecast)) Decimal(38, 10) : 10'. (ILLEGAL_DIVISION) (version 24.12.1.1614 (official build))
+
+Unable to connect optimized C data functions [No module named 'clickhouse_connect.driverc.buffer'], falling back to pure Python
+INFO:waitress:Serving on http://0.0.0.0:5050
+Unable to connect optimized C data functions [No module named 'clickhouse_connect.driverc.buffer'], falling back to pure Python
+INFO:waitress:Serving on http://0.0.0.0:5050
+Unable to connect optimized C data functions [No module named 'clickhouse_connect.driverc.buffer'], falling back to pure Python
+INFO:waitress:Serving on http://0.0.0.0:5050
+WARNING:waitress.queue:Task queue depth is 1
+WARNING:clickhouse_connect.driver.httpclient:Unexpected Http Driver Exception
+Traceback (most recent call last):
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 429, in _raw_request
+    response = self.http.request(method, url, **kwargs)
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\_request_methods.py", line 143, in request
+    return self.request_encode_body(
+           ~~~~~~~~~~~~~~~~~~~~~~~~^
+        method, url, fields=fields, headers=headers, **urlopen_kw
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\_request_methods.py", line 278, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\poolmanager.py", line 457, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\util\retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+        self, url, f"Read timed out. (read timeout={timeout_value})"
+    ) from err
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='172.22.25.165', port=8123): Read timed out. (read timeout=300)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Budget App\backend\app.py", line 1422, in calculate_daily_budget
+    budget_result = ch_client.query(budget_query, parameters=query_params)
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\client.py", line 209, in query
+    return self._query_with_context(query_context)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 225, in _query_with_context
+    response = self._raw_request(body,
+                                 params,
+    ...<3 lines>...
+                                 fields=fields,
+                                 server_wait=not context.streaming)
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 441, in _raw_request
+    raise OperationalError(f'Error {ex} executing HTTP request attempt {attempts}{err_url}') from ex
+clickhouse_connect.driver.exceptions.OperationalError: Error HTTPConnectionPool(host='172.22.25.165', port=8123): Read timed out. (read timeout=300) executing HTTP request attempt 1 (http://172.22.25.165:8123)
+WARNING:clickhouse_connect.driver.httpclient:Unexpected Http Driver Exception
+Traceback (most recent call last):
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 429, in _raw_request
+    response = self.http.request(method, url, **kwargs)
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\_request_methods.py", line 143, in request
+    return self.request_encode_body(
+           ~~~~~~~~~~~~~~~~~~~~~~~~^
+        method, url, fields=fields, headers=headers, **urlopen_kw
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\_request_methods.py", line 278, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\poolmanager.py", line 457, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\util\retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+        self, url, f"Read timed out. (read timeout={timeout_value})"
+    ) from err
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='172.22.25.165', port=8123): Read timed out. (read timeout=300)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Budget App\backend\app.py", line 1422, in calculate_daily_budget
+    budget_result = ch_client.query(budget_query, parameters=query_params)
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\client.py", line 209, in query
+    return self._query_with_context(query_context)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 225, in _query_with_context
+    response = self._raw_request(body,
+                                 params,
+    ...<3 lines>...
+                                 fields=fields,
+                                 server_wait=not context.streaming)
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 441, in _raw_request
+    raise OperationalError(f'Error {ex} executing HTTP request attempt {attempts}{err_url}') from ex
+clickhouse_connect.driver.exceptions.OperationalError: Error HTTPConnectionPool(host='172.22.25.165', port=8123): Read timed out. (read timeout=300) executing HTTP request attempt 1 (http://172.22.25.165:8123)
+WARNING:clickhouse_connect.driver.httpclient:Unexpected Http Driver Exception
+Traceback (most recent call last):
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 429, in _raw_request
+    response = self.http.request(method, url, **kwargs)
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\_request_methods.py", line 143, in request
+    return self.request_encode_body(
+           ~~~~~~~~~~~~~~~~~~~~~~~~^
+        method, url, fields=fields, headers=headers, **urlopen_kw
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\_request_methods.py", line 278, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\poolmanager.py", line 457, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\util\retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+        self, url, f"Read timed out. (read timeout={timeout_value})"
+    ) from err
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='172.22.25.165', port=8123): Read timed out. (read timeout=300)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Budget App\backend\app.py", line 1422, in calculate_daily_budget
+    budget_result = ch_client.query(budget_query, parameters=query_params)
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\client.py", line 209, in query
+    return self._query_with_context(query_context)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 225, in _query_with_context
+    response = self._raw_request(body,
+                                 params,
+    ...<3 lines>...
+                                 fields=fields,
+                                 server_wait=not context.streaming)
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 441, in _raw_request
+    raise OperationalError(f'Error {ex} executing HTTP request attempt {attempts}{err_url}') from ex
+clickhouse_connect.driver.exceptions.OperationalError: Error HTTPConnectionPool(host='172.22.25.165', port=8123): Read timed out. (read timeout=300) executing HTTP request attempt 1 (http://172.22.25.165:8123)
+WARNING:clickhouse_connect.driver.httpclient:Unexpected Http Driver Exception
+Traceback (most recent call last):
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 429, in _raw_request
+    response = self.http.request(method, url, **kwargs)
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\_request_methods.py", line 143, in request
+    return self.request_encode_body(
+           ~~~~~~~~~~~~~~~~~~~~~~~~^
+        method, url, fields=fields, headers=headers, **urlopen_kw
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\_request_methods.py", line 278, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\poolmanager.py", line 457, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\util\retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+        self, url, f"Read timed out. (read timeout={timeout_value})"
+    ) from err
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='172.22.25.165', port=8123): Read timed out. (read timeout=300)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Budget App\backend\app.py", line 1422, in calculate_daily_budget
+    budget_result = ch_client.query(budget_query, parameters=query_params)
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\client.py", line 209, in query
+    return self._query_with_context(query_context)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 225, in _query_with_context
+    response = self._raw_request(body,
+                                 params,
+    ...<3 lines>...
+                                 fields=fields,
+                                 server_wait=not context.streaming)
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 441, in _raw_request
+    raise OperationalError(f'Error {ex} executing HTTP request attempt {attempts}{err_url}') from ex
+clickhouse_connect.driver.exceptions.OperationalError: Error HTTPConnectionPool(host='172.22.25.165', port=8123): Read timed out. (read timeout=300) executing HTTP request attempt 1 (http://172.22.25.165:8123)
+ERROR:clickhouse_connect.driver.transform:Error serializing column `Speciality` into data type `String`
+Traceback (most recent call last):
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\transform.py", line 104, in chunk_gen
+    col_type.write_column(data, output, context)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\datatypes\base.py", line 202, in write_column
+    self.write_column_data(column, dest, ctx)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\datatypes\base.py", line 217, in write_column_data
+    self._write_column_binary(column, dest, ctx)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\datatypes\string.py", line 50, in _write_column_binary
+    handle_error(data_conv.write_str_col(column, self.nullable, encoding, dest))
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\errors.py", line 13, in handle_error
+    raise DataError(error_messages[error_num])
+clickhouse_connect.driver.exceptions.DataError: Invalid None value in non-Nullable column
+Traceback (most recent call last):
+  File "D:\Budget App\backend\app.py", line 1883, in publish_to_clickhouse
+    ch_client.insert(
+    ~~~~~~~~~~~~~~~~^
+        'budget.budget_data',
+        ^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+                     'Census', 'Episodes', 'CPE', 'ALOS', 'Revenue', 'is_last_value', 'CreatedBy']
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\client.py", line 617, in insert
+    return self.data_insert(context)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 266, in data_insert
+    response = self._raw_request(block_gen, params, headers, error_handler=error_handler, server_wait=False)
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 452, in _raw_request
+    error_handler(response)
+    ~~~~~~~~~~~~~^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 251, in error_handler
+    raise ex
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\transform.py", line 104, in chunk_gen
+    col_type.write_column(data, output, context)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\datatypes\base.py", line 202, in write_column
+    self.write_column_data(column, dest, ctx)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\datatypes\base.py", line 217, in write_column_data
+    self._write_column_binary(column, dest, ctx)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\datatypes\string.py", line 50, in _write_column_binary
+    handle_error(data_conv.write_str_col(column, self.nullable, encoding, dest))
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\errors.py", line 13, in handle_error
+    raise DataError(error_messages[error_num])
+clickhouse_connect.driver.exceptions.DataError: Invalid None value in non-Nullable column
+ERROR:clickhouse_connect.driver.transform:Error serializing column `Speciality` into data type `String`
+Traceback (most recent call last):
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\transform.py", line 104, in chunk_gen
+    col_type.write_column(data, output, context)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\datatypes\base.py", line 202, in write_column
+    self.write_column_data(column, dest, ctx)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\datatypes\base.py", line 217, in write_column_data
+    self._write_column_binary(column, dest, ctx)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\datatypes\string.py", line 50, in _write_column_binary
+    handle_error(data_conv.write_str_col(column, self.nullable, encoding, dest))
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\errors.py", line 13, in handle_error
+    raise DataError(error_messages[error_num])
+clickhouse_connect.driver.exceptions.DataError: Invalid None value in non-Nullable column
+Traceback (most recent call last):
+  File "D:\Budget App\backend\app.py", line 1883, in publish_to_clickhouse
+    ch_client.insert(
+    ~~~~~~~~~~~~~~~~^
+        'budget.budget_data',
+        ^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+                     'Census', 'Episodes', 'CPE', 'ALOS', 'Revenue', 'is_last_value', 'CreatedBy']
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\client.py", line 617, in insert
+    return self.data_insert(context)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 266, in data_insert
+    response = self._raw_request(block_gen, params, headers, error_handler=error_handler, server_wait=False)
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 452, in _raw_request
+    error_handler(response)
+    ~~~~~~~~~~~~~^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\httpclient.py", line 251, in error_handler
+    raise ex
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\transform.py", line 104, in chunk_gen
+    col_type.write_column(data, output, context)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\datatypes\base.py", line 202, in write_column
+    self.write_column_data(column, dest, ctx)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\datatypes\base.py", line 217, in write_column_data
+    self._write_column_binary(column, dest, ctx)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\datatypes\string.py", line 50, in _write_column_binary
+    handle_error(data_conv.write_str_col(column, self.nullable, encoding, dest))
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Budget App\venv\Lib\site-packages\clickhouse_connect\driver\errors.py", line 13, in handle_error
+    raise DataError(error_messages[error_num])
+clickhouse_connect.driver.exceptions.DataError: Invalid None value in non-Nullable column
+Unable to connect optimized C data functions [No module named 'clickhouse_connect.driverc.buffer'], falling back to pure Python
+INFO:waitress:Serving on http://0.0.0.0:5050

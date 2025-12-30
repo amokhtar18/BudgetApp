@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Statement Budget | HNH</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Income Statement Budget Styles - Matching Assumptions page */
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 60px);
+            overflow: hidden;
+            margin: 0;
+            padding: 0 !important;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .table-container {
+            flex: 1;
+            overflow: auto;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-light) var(--bg-light);
+        }
+
+        .table-container::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        .table-container::-webkit-scrollbar-track {
+            background: var(--bg-light);
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 5px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Controls Bar */
+        .controls-bar {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 12px 20px;
+            margin: 0;
+            background: var(--bg-light);
+            border-bottom: 1px solid var(--border);
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-group label {
+            font-weight: 500;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .control-group select,
+        .control-group input {
+            padding: 8px 12px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            min-width: 140px;
+            transition: all 0.2s;
+        }
+
+        .control-group select:focus,
+        .control-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(12, 90, 145, 0.15);
+        }
+
+        /* Branch Select Dropdown */
+        #branch-select {
+            min-width: 160px;
+        }
+
+        #load-btn {
+            padding: 8px 16px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        #load-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
+        }
+
+        .action-buttons {
+            margin-left: auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            padding: 8px 16px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary {
+            background: var(--bg-white);
+            color: var(--text-dark);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-assumptions {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-assumptions:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Version Badge */
+        .version-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .version-badge.hidden {
+            display: none;
+        }
+
+        .version-badge i {
+            font-size: 11px;
+        }
+
+        /* Table Styles - Matching Assumptions page theme */
+        .income-table {
+            width: 100%;
+            min-width: max-content;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+
+        .income-table th,
+        .income-table td {
+            padding: 0.75rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .income-table th {
+            background: var(--gradient-primary);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.75px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .income-table th:first-child {
+            text-align: left;
+            position: sticky;
+            left: 0;
+            z-index: 20;
+            background: var(--primary);
+        }
+
+        .income-table tbody tr:nth-child(even) {
+            background: var(--bg-light);
+        }
+
+        .income-table tbody tr:hover {
+            background: rgba(12, 90, 145, 0.08);
+        }
+
+        .income-table td:first-child {
+            text-align: left;
+            font-weight: 500;
+            position: sticky;
+            left: 0;
+            background: inherit;
+            z-index: 5;
+        }
+
+        /* Value cells */
+        .value-cell {
+            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+            font-size: 0.85rem;
+            text-align: right !important;
+        }
+
+        .value-cell.negative {
+            color: var(--accent);
+        }
+
+        .value-cell.positive {
+            color: var(--success);
+        }
+
+        /* Row types */
+        .section-row {
+            background: var(--gradient-primary) !important;
+            color: white;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .section-row td {
+            padding: 0.5rem 1rem;
+            background: transparent !important;
+        }
+
+        .section-row td:first-child {
+            background: transparent !important;
+            color: white;
+        }
+
+        .subsection-row {
+            background: rgba(12, 90, 145, 0.1) !important;
+            font-weight: 600;
+        }
+
+        .subsection-row td:first-child {
+            background: rgba(12, 90, 145, 0.1) !important;
+        }
+
+        .calculated-row {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important;
+            color: white;
+            font-weight: 700;
+        }
+
+        .calculated-row td {
+            background: transparent !important;
+            color: white;
+        }
+
+        .calculated-row td:first-child {
+            background: transparent !important;
+            color: white;
+        }
+
+        .subtotal-row {
+            background: rgba(12, 90, 145, 0.15) !important;
+            font-weight: 600;
+        }
+
+        .subtotal-row td:first-child {
+            background: rgba(12, 90, 145, 0.15) !important;
+        }
+
+        /* FY Total column */
+        .fy-total-col {
+            background: rgba(12, 90, 145, 0.1);
+            font-weight: 600;
+            border-left: 2px solid var(--primary);
+        }
+
+        .section-row .fy-total-col,
+        .calculated-row .fy-total-col {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Section Title Header */
+        .section-title-header {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            padding: 12px 20px;
+            margin: 0;
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Loading spinner */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading.hidden {
+            display: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--bg-light);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Status message */
+        .status-message {
+            padding: 12px 20px;
+            margin: 0;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status-message.hidden {
+            display: none;
+        }
+
+        .status-message.success {
+            background: var(--success-light);
+            color: var(--success);
+            border-bottom: 1px solid var(--success);
+        }
+
+        .status-message.error {
+            background: rgba(239, 65, 81, 0.1);
+            color: var(--accent);
+            border-bottom: 1px solid var(--accent);
+        }
+
+        .status-message.info {
+            background: rgba(12, 90, 145, 0.1);
+            color: var(--primary);
+            border-bottom: 1px solid var(--primary);
+        }
+
+        /* No data state */
+        .no-data-state {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .no-data-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        .no-data-state h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .no-data-state p {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Line item indent */
+        .indent-1 {
+            padding-left: 20px;
+        }
+
+        .indent-2 {
+            padding-left: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="images/Logo English.svg" alt="Logo" onerror="this.style.display='none'">
+                <h1>Income Statement Budget</h1>
+            </div>
+
+            <div class="header-controls">
+                <!-- Navigation Links -->
+                <div class="nav-link">
+                    <a href="index.html" class="btn-nav" title="Budget Assumptions">
+                        <i class="fas fa-table"></i> Budget
+                    </a>
+                </div>
+
+                <div id="admin-link" class="admin-link hidden">
+                    <a href="users.html" class="btn-admin" title="User Management">
+                        <i class="fas fa-users-cog"></i>
+                    </a>
+                </div>
+
+                <div id="user-display" class="user-display">
+                    <!-- User info populated by JS -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Status Messages -->
+        <div id="status-message" class="status-message hidden"></div>
+
+        <!-- Loading Spinner -->
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Loading data...</p>
+        </div>
+
+        <!-- Controls Bar -->
+        <div class="controls-bar">
+            <div class="control-group">
+                <label for="year-select">Year:</label>
+                <select id="year-select">
+                    <option value="">Select Year</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="scenario-select">Scenario:</label>
+                <select id="scenario-select">
+                    <option value="most_likely">Most Likely</option>
+                    <option value="best_case">Best Case</option>
+                    <option value="worst_case">Worst Case</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="branch-select">Branch:</label>
+                <select id="branch-select">
+                    <option value="all">All Branches</option>
+                    <option value="1">Riyadh</option>
+                    <option value="2">Khamis</option>
+                    <option value="3">Jazan</option>
+                    <option value="4">Qassem</option>
+                    <option value="5">Madinah</option>
+                    <option value="6">Abha</option>
+                </select>
+            </div>
+
+            <button id="load-btn">
+                <i class="fas fa-eye"></i> View
+            </button>
+
+            <span id="year-badge" class="version-badge hidden">
+                <i class="fas fa-code-branch"></i>
+                <span id="year-badge-text">Loading...</span>
+            </span>
+
+            <div class="action-buttons">
+                <a href="income-statement-assumptions.html" class="btn-assumptions">
+                    <i class="fas fa-edit"></i> Assumptions
+                </a>
+                <button id="export-btn" class="btn-secondary">
+                    <i class="fas fa-file-excel"></i> Export
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="table-container">
+                <!-- Income Statement Table -->
+                <div class="income-statement-section">
+                    <h3 class="section-title-header"><i class="fas fa-file-invoice-dollar"></i> Income Statement Budget</h3>
+                    <table class="income-table">
+                        <thead>
+                            <tr id="table-header">
+                                <th>Line Item</th>
+                                <!-- Month columns will be added by JS -->
+                            </tr>
+                        </thead>
+                        <tbody id="budget-table-body">
+                            <!-- Rows will be populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- No Data State -->
+                <div id="no-data-state" class="no-data-state">
+                    <i class="fas fa-inbox"></i>
+                    <h3>No Budget Data</h3>
+                    <p>Select a year and at least one branch to view the income statement budget.</p>
+                    <a href="income-statement-assumptions.html" class="btn-assumptions">
+                        <i class="fas fa-plus"></i> Create Assumptions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Hayat National Hospitals Budget Management System</p>
+    </footer>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <script src="js/income-statement-budget.js"></script>
+</body>
+</html>
