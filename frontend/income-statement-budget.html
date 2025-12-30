@@ -29,6 +29,7 @@
             overflow: hidden;
             margin: 0;
             padding: 0 !important;
+            padding-top: 80px !important; /* Account for fixed header */
         }
 
         .main-content {
@@ -465,20 +466,35 @@
                 <h1>Income Statement Budget</h1>
             </div>
 
-            <div class="header-controls">
-                <!-- Navigation Links -->
-                <div class="nav-link">
-                    <a href="index.html" class="btn-nav" title="Budget Assumptions">
-                        <i class="fas fa-table"></i> Budget
-                    </a>
+            <!-- Center Navigation with Dropdowns -->
+            <nav class="header-nav">
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-btn">
+                        <i class="fas fa-chart-pie"></i> Daily Budget <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="nav-dropdown-content">
+                        <a href="index.html"><i class="fas fa-calculator"></i> Budget Entry</a>
+                        <a href="daily-budget.html"><i class="fas fa-chart-pie"></i> Daily Budget Distribution</a>
+                    </div>
                 </div>
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-btn">
+                        <i class="fas fa-file-invoice-dollar"></i> Income Statement <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="nav-dropdown-content">
+                        <a href="income-statement-assumptions.html"><i class="fas fa-sliders-h"></i> Assumptions</a>
+                        <a href="income-statement-budget.html" class="active"><i class="fas fa-table"></i> Budget View</a>
+                    </div>
+                </div>
+            </nav>
 
+            <!-- Right Section: Admin, User, Logout -->
+            <div class="header-right-section">
                 <div id="admin-link" class="admin-link hidden">
                     <a href="users.html" class="btn-admin" title="User Management">
-                        <i class="fas fa-users-cog"></i>
+                        <i class="fas fa-users-cog"></i> Admin
                     </a>
                 </div>
-
                 <div id="user-display" class="user-display">
                     <!-- User info populated by JS -->
                 </div>
@@ -502,15 +518,6 @@
                 <label for="year-select">Year:</label>
                 <select id="year-select">
                     <option value="">Select Year</option>
-                </select>
-            </div>
-
-            <div class="control-group">
-                <label for="scenario-select">Scenario:</label>
-                <select id="scenario-select">
-                    <option value="most_likely">Most Likely</option>
-                    <option value="best_case">Best Case</option>
-                    <option value="worst_case">Worst Case</option>
                 </select>
             </div>
 

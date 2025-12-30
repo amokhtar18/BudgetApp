@@ -102,7 +102,6 @@ const LINE_ITEMS_CONFIG = [
 
 // DOM Elements
 const yearSelect = document.getElementById('year-select');
-const scenarioSelect = document.getElementById('scenario-select');
 const branchSelect = document.getElementById('branch-select');
 const loadBtn = document.getElementById('load-btn');
 const exportBtn = document.getElementById('export-btn');
@@ -264,7 +263,7 @@ function updateVersionDisplay() {
 async function loadBudget() {
     const year = yearSelect?.value;
     selectedBranch = branchSelect?.value || 'all';
-    const scenario = scenarioSelect?.value || 'most_likely';
+    const scenario = 'most_likely'; // Hardcoded - scenarios removed
     
     if (!year) {
         showStatus('Please select a year', 'error');
@@ -978,12 +977,6 @@ function restoreSessionData() {
         if (sessionData.currentYear && yearSelect) {
             yearSelect.value = sessionData.currentYear;
             currentYear = sessionData.currentYear;
-        }
-        
-        // Restore scenario selection
-        if (sessionData.currentScenario && scenarioSelect) {
-            scenarioSelect.value = sessionData.currentScenario;
-            currentScenario = sessionData.currentScenario;
         }
         
         // Restore branch selection

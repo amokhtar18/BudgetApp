@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     initializeTabs();
     await loadYears();
     await loadBranches();
-    await loadScenarios();
     setupEventListeners();
     
     // Restore saved calculation data if available
@@ -266,9 +265,6 @@ function restoreCalculationData() {
             if (calculationParams.year) {
                 document.getElementById('dist-year').value = calculationParams.year;
             }
-            if (calculationParams.scenario) {
-                document.getElementById('dist-scenario').value = calculationParams.scenario;
-            }
             
             // Update UI
             document.getElementById('summary-section').classList.remove('hidden');
@@ -315,16 +311,11 @@ let branchChart = null;
  */
 async function calculateDailyBudget() {
     const year = document.getElementById('dist-year').value;
-    const scenario = document.getElementById('dist-scenario').value;
+    const scenario = 'most_likely'; // Hardcoded - scenarios removed
     const branchId = document.getElementById('dist-branch').value;
 
     if (!year) {
         showStatus('Please select year', 'error');
-        return;
-    }
-
-    if (!scenario) {
-        showStatus('Please select scenario', 'error');
         return;
     }
     
@@ -493,10 +484,10 @@ function updateSummaryCards() {
  */
 async function loadPublishedSummary() {
     const year = document.getElementById('dist-year').value;
-    const scenario = document.getElementById('dist-scenario').value;
+    const scenario = 'most_likely'; // Hardcoded - scenarios removed
     const branchId = document.getElementById('dist-branch').value;
     
-    if (!year || !scenario) {
+    if (!year) {
         return;
     }
     
